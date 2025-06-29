@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Administrador extends Usuario {
 
-    public Administrador(String nombre, int codigo, int dni, int telefono, Direccion direccion) {
+    public Administrador(String nombre, int codigo, int dni,int telefono, Direccion direccion) {
         super(nombre, codigo, dni, telefono, direccion);
     }
     

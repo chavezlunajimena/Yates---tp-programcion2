@@ -6,7 +6,7 @@ public abstract class Usuario {// es un metodo Abstracto de socio-empleado-admin
     private String nombre;
     private int codigo;
     private int dni;
-    private int telefono;
+    int telefono;
     private Direccion direccion;
 
     public Usuario(String nombre, int codigo, int dni, int telefono, Direccion direccion) {
@@ -63,7 +63,5 @@ public abstract class Usuario {// es un metodo Abstracto de socio-empleado-admin
         System.out.println("Telefono: " + telefono);
         System.out.println("Direccion: " + direccion);
     }
-
-
 
 }

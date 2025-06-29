@@ -18,8 +18,8 @@ public class Socio extends Usuario {
         super(nombre, codigo, dni, telefono, direccion);
         
         this.fechaIngreso= fechaIngreso;
-        embarcaciones = new ArrayList<>();// inicializa los arrays
-        amarresPropios = new ArrayList<>();//
+        this.embarcaciones = new ArrayList<>();// inicializa los arrays
+        this.amarresPropios = new ArrayList<>();//
         
     }
 
@@ -39,16 +39,14 @@ public class Socio extends Usuario {
         this.fechaIngreso = fechaIngreso;
     }
     
-    /**
-     *
-     * @param e
-     */
     public void agregarEmbarcacion(Embarcacion e){
         embarcaciones.add(e);
+        System.out.println("Embarcacion " + e.getNombre() + " agregada al socio " + this.getNombre());
     }
     
     public void comprarAmarre(CompraAmarre ca){
         amarresPropios.add(ca);
+        System.out.println("Amarre " + ca.getAmarre() + " comprado por " + this.getNombre());
     }
     
     public void verEnbarcaciones(){//metodo para mostrar el array de embarcaciones
@@ -60,7 +58,6 @@ public class Socio extends Usuario {
                 System.out.println(emb);
             }
         }
-        
     }
     
     public void verAmarresPropios(){//muestra el array de amarres
@@ -74,15 +71,9 @@ public class Socio extends Usuario {
         }
     }
     
-    public void agregarEmbarcacion (Embarcacion e){// para agregar embarcaciones que recibe por parametro al array 
-        
-        embarcaciones.add(e);
+    public void mostrarDatos(){
+        super.mostrarDatos();
+        System.out.println("Fecha de ingreso: " + fechaIngreso);
     }
-    
-    public void comprarAmarre( CompraAmarre ca){// agrega ammarres al array al comprar
-        
-        amarresPropios.add(ca);
-    }
-    ///////falta poner un metodo para ver zonas de las embarcaiones o amarres? hay que hacerlo aca o en embarcacion?
     
 }

@@ -1,38 +1,27 @@
 
 package yachtclub;
 
-import java.time.LocalDate;
-
 public class Main {
     public static void main(String[] args) {
         //Conecto a la base de datos
-        BaseDatosUsuarios bd = new BaseDatosUsuarios();
-        
-        //creo un socio de prueba con embarcaciones y amarres
-        Direccion dirSocio = new Direccion("Puerto Madero", 100, "CABA");
-        Socio socio1 = new Socio("Juan Perez", 2222, 33333333, 1166667777, dirSocio, LocalDate.now());
+        BaseDeDatos bd = new BaseDeDatos();
 
-        Dimension dimVelero = new Dimension(3.5, 10);
-        Velero velero1 = new Velero("VEL123", "Velero Aurora", dimVelero);
-
-        Dimension dimMoto = new Dimension(1.2, 2.5);
-        MotoDeAgua moto1 = new MotoDeAgua("MOT456", "Jet Yamaha", dimMoto);
-        
-        socio1.AgregarEmbarcacion(velero1);
-        socio1.AgregarEmbarcacion(moto1);
-        
-        Amarre amarre1 = new Amarre(1, true);
-        Amarre amarre2 = new Amarre(2, false);
-        
-        CompraAmarre compra1 = new CompraAmarre(amarre1, LocalDate.now());
-        
-        //agregar este socio a la base de datos
-        bd.agregarUsuario(socio1);
-        
-        //crear usuarioSistema y ejecutar login + menu
+        //agrego socio
+        bd.agregarUsuario("socio1", 1, 1, 1234567891, "Puerto Madero", 100, "CABA", java.time.LocalDate.now());
+        bd.agregarUsuario("socio2", 6, 6, 1234567891, "Puerto Madero", 100, "CABA", java.time.LocalDate.now());
+        bd.agregarUsuario("socio3", 5, 5, 1234567891, "Puerto Madero", 100, "CABA", java.time.LocalDate.now());
+        //empleado
+        bd.agregarUsuario("empleado1", 2, 2, 1160105487, "Rivadavia", 9100, "CABA", "mantenimiento");
+        //admin
+        bd.agregarUsuario("admin1", 3, 3, 1160134487, "Ayacucho", 300, "CABA");
+        bd.agregarZona("A", "yate", 23, 455);
+        bd.agregarZona("B", "bote", 23, 455);
+        bd.agregarAmarre(2, true, 10, 10,"A");
+        bd.agregarAmarre(22, true, 20, 20,"A");
+        bd.agregarAmarre(1, true, 20, 20,"A");
         UsuarioSistema sistema = new UsuarioSistema(bd);
-        sistema.run();
-        
+        sistema.ejecutar();
+
     }
     
 }

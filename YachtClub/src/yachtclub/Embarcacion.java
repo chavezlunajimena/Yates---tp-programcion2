@@ -2,7 +2,7 @@
 package yachtclub;
 
 
-public abstract class Embarcacion{
+public class Embarcacion{
     
     protected String matricula;
     protected String nombre;
@@ -15,9 +15,8 @@ public abstract class Embarcacion{
         this.nombre = nombre;
         this.tipo = tipo;
         this.dimension = dimension;
-        this.amarreAsignado = null; //empieza sin amarre asignado
+        this.amarreAsignado = null;
     }
-// asigno el amarre que resivo por parametro
     public void setAmarreAsignado(Amarre amarreAsignado) {
         this.amarreAsignado = amarreAsignado;
     }
@@ -34,19 +33,14 @@ public abstract class Embarcacion{
         return matricula;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
 
-    public Dimension getDimension() {
-        return dimension;
-    }
-
-    //para mostrar los datos cuando piden mostrar las embarcaciones en socio-- mostrar el amarre?
     @Override
     public String toString() {
-        return "Embarcacion: " + nombre + " | Matricula: " + matricula + " | Tipo: " + tipo + " | Dimencion: " + dimension;
+        return "Embarcacion: " + nombre + " | Matricula: " + matricula + " | Tipo: " + tipo + " | Dimension: " + dimension;
     }
+	public boolean mismaMatricula(String numeroEmbarcacion) {
+		return this.matricula.equals(numeroEmbarcacion);
+	}
 
     
     

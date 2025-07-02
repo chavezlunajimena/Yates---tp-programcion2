@@ -2,72 +2,91 @@
 package yachtclub;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class Zona {
-    private String letra;
-    private String tipoDeBarco;
-    private double profundidad;
-    private double anchoAmarre;
-    private int cantEmbarcacion;
+	private String letra;
+	private String tipoDeBarco;
+	private final double profundidad;
+	private double anchoAmarre;
+	private ArrayList<Amarre> amarres;
+	private ArrayList<Empleado> empleados;
 
-    public Zona(String letra, String tipoDeBarco, double profundidad, double anchoAmarre, int cantEmbarcacion) {
-        this.letra = letra;
-        this.tipoDeBarco = tipoDeBarco;
-        this.profundidad = profundidad;
-        this.anchoAmarre = anchoAmarre;
-        this.cantEmbarcacion = cantEmbarcacion;
-    }
-    
-    public String getLetra() {
-        return letra;
-    }
+	public Zona(String letra, String tipoDeBarco, double anchoAmarre) {
+		setLetra(letra);
+		setTipoDeBarco(tipoDeBarco);
+		this.profundidad = 7;
+		setAnchoAmarre(anchoAmarre);
+		this.amarres = new ArrayList<>();
+		this.empleados = new ArrayList<>();
+	}
 
-    public void setLetra(String letra) {
-        this.letra = letra;
-    }
+	public String getLetra() {
+		return letra;
+	}
 
-    public void setTipoDeBarco(String tipoDeBarco) {
-        this.tipoDeBarco = tipoDeBarco;
-    }
+	private void setLetra(String letra) {
+		this.letra = letra;
+	}
 
-    public void setProfundidad(double profundidad) {
-        this.profundidad = profundidad;
-    }
+	private void setTipoDeBarco(String tipoDeBarco) {
+		this.tipoDeBarco = tipoDeBarco;
+	}
 
-    public void setAnchoAmarre(double anchoAmarre) {
-        this.anchoAmarre = anchoAmarre;
-    }
+	private void setAnchoAmarre(double anchoAmarre) {
+		this.anchoAmarre = anchoAmarre;
+	}
 
-    public void setCantEmbarcacion(int cantEmbarcacion) {
-        this.cantEmbarcacion = cantEmbarcacion;
-    }
+	public String getTipoDeBarco() {
+		return tipoDeBarco;
+	}
 
-    public String getTipoDeBarco() {
-        return tipoDeBarco;
-    }
+	public double getProfundidad() {
+		return profundidad;
+	}
 
-    public double getProfundidad() {
-        return profundidad;
-    }
+	public double getAncho() {
+		return anchoAmarre;
+	}
 
-    public double getAncho() {
-        return anchoAmarre;
-    }
+	@Override
+	public String toString() {
+		return "Zona " + letra + " | Tipo barcos: " + tipoDeBarco + " | Profundidad: " + profundidad
+				+ "m | Ancho amarre: " + anchoAmarre + "m";
+	}
 
-    public int getCantEmbarcacion() {
-        return cantEmbarcacion;
-    }
+	boolean mismaLetra(String letra) {
+		return this.letra.equals(letra);
+	}
 
-    @Override
-    public String toString() {
-        return "Zona "+ letra + " | Tipo barcos: " + tipoDeBarco + " | Cantidad embarcaciones: " + cantEmbarcacion +
-                " | Profundidad: " + profundidad + "m | Ancho amarre: " + anchoAmarre + "m";
-    }
+	public void agregarEmpleado(Empleado empleado) {
+		this.empleados.add(empleado);
+	}
 
-   
-    
-   
-    
+	public int contarBarcosAsignadosPorEmpleado(Empleado empleado) {
+		int cant = 0;
+		for (Amarre amarre : amarres) {
+			if (amarre.isOcupado() && amarre.mismoEncargado(empleado)) {
+				cant++;
+			}
+		}
+		return cant;
+	}
+
+	public void verEmbarcacionesAsignadas(Empleado empleado) {
+		boolean tieneAmarre = false;
+		for (Amarre amarre : amarres) {
+			if (amarre.isOcupado() && amarre.mismoEncargado(empleado)) {
+				System.out.println(amarre);
+				tieneAmarre = true;
+			}
+		}
+		if (!tieneAmarre) {
+			System.out.println("No tiene embarcaciones asignadas");
+		}
+	}
+
+	public void agregarAmarre(Amarre amarreNuevo) {
+		this.amarres.add(amarreNuevo);
+		
+	}
 }

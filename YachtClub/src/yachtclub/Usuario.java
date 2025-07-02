@@ -1,67 +1,89 @@
 
 package yachtclub;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public abstract class Usuario {// es un metodo Abstracto de socio-empleado-admin
-    private String nombre;
-    private int codigo;
-    private int dni;
-    int telefono;
-    private Direccion direccion;
+public abstract class Usuario implements MenuUsuario {
+	private String nombre;
+	private int codigo;
+	private int dni;
+	private int telefono;
+	private Direccion direccion;
 
-    public Usuario(String nombre, int codigo, int dni, int telefono, Direccion direccion) {
-        this.nombre = nombre;
-        this.codigo = codigo;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.direccion = direccion;
-    }
+	public Usuario(String nombre, int codigo, int dni, int telefono, Direccion direccion) {
+		this.setNombre(nombre);
+		this.setCodigo(codigo);
+		this.setDni(dni);
+		this.setTelefono(telefono);
+		this.setDireccion(direccion);
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	private void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public int getCodigo() {
-        return codigo;
-    }
+	private void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
 
-    public int getDni() {
-        return dni;
-    }
+	private void setDni(int dni) {
+		this.dni = dni;
+	}
 
-    public int getTelefono() {
-        return telefono;
-    }
+	private void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
 
-    public Direccion getDireccion() {
-        return direccion;
-    }
+	private void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+	public void mostrarDatos() {
+		System.out.println("Nombre: " + nombre);
+		System.out.println("DNI: " + dni);
+		System.out.println("Telefono: " + telefono);
+		System.out.println("Direccion: " + direccion);
+		System.out.println(getClass().getSimpleName());
+	}
 
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
+	public boolean mismoDni(int dni) {
+		return this.dni == dni;
+	}
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
+	public boolean mismoCodigo(int codigo) {
+		return this.codigo == codigo;
+	}
 
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
+	public int elegirOpcionMenu(ArrayList<String> opcionesMenu, String titulo) {
+		Scanner sc = new Scanner(System.in);
+		int opcion;
+		mostrarTitulo(titulo);
 
-    public void mostrarDatos(){
-        System.out.println("Nombre: " + nombre);
-        System.out.println("DNI: " + dni);
-        System.out.println("Telefono: " + telefono);
-        System.out.println("Direccion: " + direccion);
-    }
+		mostrarMenu(opcionesMenu);
+		opcion = Integer.parseInt(sc.nextLine());
+		while (opcion < 1 || opcion > opcionesMenu.size()) {
+			System.out.println("Opcion ingresada invalida, intente nuevamente.");
+			System.out.println("Debe ser un numero entre 1 y " + opcionesMenu.size());
+			mostrarTitulo(titulo);
+			mostrarMenu(opcionesMenu);
+			opcion = Integer.parseInt(sc.nextLine());
+		}
+		
+		return opcion;
+	}
 
+	private void mostrarMenu(ArrayList<String> opcionesMenu) {
+		for (int i = 0; i < opcionesMenu.size(); i++) {
+			System.out.println((i + 1) + ". " + opcionesMenu.get(i));
+		}
+	}
+	
+	private void mostrarTitulo(String titulo) {
+		System.out.println(titulo);
+	}
 }

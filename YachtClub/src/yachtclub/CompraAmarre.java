@@ -27,6 +27,10 @@ public class CompraAmarre {
         return "Compra de " + amarre + " | Fecha: " + fechaCompra;
     }
 
+	public boolean estaDisponible() {
+		return !this.amarre.isOcupado();
+	}
+
     
     
     

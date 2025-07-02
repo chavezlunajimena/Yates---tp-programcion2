@@ -5,79 +5,34 @@ import java.util.Scanner;
 
 
 public class UsuarioSistema {
-    private BaseDatosUsuarios bdUsuarios;
-    private Scanner sc;
+    private BaseDeDatos bdUsuarios;
 
-    public UsuarioSistema(BaseDatosUsuarios bdUsuarios) {
+    public UsuarioSistema(BaseDeDatos bdUsuarios) {
         this.bdUsuarios = bdUsuarios;
-        this.sc = sc;
     }
     
-    public void run(){
+    public void ejecutar(){
+		Scanner sc = new Scanner(System.in);
         System.out.println("----Bienvenido al Sistema del Yacht Club----");
         
-        System.out.println("Ingrese su DNI: ");
-        int dni = sc.nextInt();
+        System.out.println("Ingrese su DNI: (0 = Salir del sistema)");
+        int dni = Integer.parseInt(sc.nextLine());
         
-        System.out.println("Ingrese su codigo: ");
-        int codigo = sc.nextInt();
+        while (dni != 0){
+            System.out.println("Ingrese su codigo: ");
+            int codigo = Integer.parseInt(sc.nextLine());
         
-        Usuario usuario = bdUsuarios.autenticarUsuario(dni, codigo);
+            Usuario usuario = bdUsuarios.autenticarUsuario(dni, codigo);
         
-        if(usuario != null){
-            System.out.println("Autenticacion exitosa. Bienvenido/a " + usuario.getNombre());
-            mostrarMenu(usuario);
-        }else{
-            System.out.println("Autenticacion fallida. DNI o codigo incorrecto. ");
+            if(usuario != null){
+                System.out.println("Autenticacion exitosa. Bienvenido/a " + usuario.getNombre());
+                usuario.mostrarMenu();
+            }else{
+                System.out.println("Autenticacion fallida. DNI o codigo incorrecto. ");
+            }
+            System.out.println("Ingrese su DNI: (0 = Salir del sistema)");
+            dni = Integer.parseInt(sc.nextLine());
         }
+        System.out.println("Vuelva pronto!!");
     }
-    
-    public void mostrarMenu(Usuario usuario){
-        if(usuario instanceof Administrador){
-            menuAdministrador((Administrador) usuario);
-        }else if(usuario instanceof Empleado){
-            menuEmpleado((Empleado) usuario);
-        }else if(usuario instanceof Socio){
-            menuSocio((Socio) usuario);
-        }else{
-            System.out.println("Tipo de usuario desconocido.");
-        }
-    }
-    
-    private void menuAdministrador(Administrador admin){
-        System.out.println("-----Menu Administrador-----");
-        System.out.println("1. Asignar embarcacion");
-        System.out.println("2. Registrar compra de amarre");
-        System.out.println("3. ver todas las embarcaciones");
-        System.out.println("4. Salir");
-        
-        //implementar el switch de las opcionesss me dio fiaca
-    }
-    
-    private void menuEmpleado(Empleado emp){
-        System.out.println("-----Menu Empleado-----");
-        System.out.println("1. Consultar zonas asignadas");
-        System.out.println("2. Consultar embarcaciones en zona");
-        System.out.println("3. Salir");
-        
-        //implementar el switch de las opcionesss me dio fiaca
-    }
-    
-    private void menuSocio(Socio socio){
-        System.out.println("-----Menú Socio-----");
-        System.out.println("1. Ver amarres propios");
-        System.out.println("2. Ver embarcaciones propias");
-        System.out.println("3. Salir");
-        
-        //implementar el switch de las opcionesss me dio fiaca
-    }
-    
-   
-
-  
-
-
-  
- 
-  
 }

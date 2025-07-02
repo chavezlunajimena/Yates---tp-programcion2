@@ -1,46 +1,35 @@
 
 package yachtclub;
 
-
 class Direccion {
-    private String calle;
-    private int numero;
-    private String ciudad;
+	private String calle;
+	private int numero;
+	private String ciudad;
 
-    public Direccion(String calle, int numero, String ciudad) {
-        this.calle = calle;
-        this.numero = numero;
-        this.ciudad = ciudad;
-    }
+	public Direccion(String calle, int numero, String ciudad) {
+		this.setCalle(calle);
+		this.setNumero(numero);
+		this.setCiudad(ciudad);
+	}
 
-    public String getCalle() {
-        return calle;
-    }
+	private void setCalle(String calle) {
+		this.calle = calle;
+	}
 
-    public int getNumero() {
-        return numero;
-    }
+	private void setNumero(int numero) {
+		if (numero > 0)
+			this.numero = numero;
+		else
+			this.numero = 0;
+	}
 
-    public String getCiudad() {
-        return ciudad;
-    }
+	private void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
 
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
+	@Override
+	public String toString() {
+		return calle + " " + numero + ", " + ciudad;
+	}
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    @Override
-    public String toString() {
-        return calle + " " + numero + ", " + ciudad;
-    }
-    
-    
 }

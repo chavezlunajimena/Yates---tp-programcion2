@@ -5,42 +5,62 @@ package yachtclub;
 public class Amarre {
     private int numero;
     private boolean servicioMantenimiento;
-    private boolean ocupado;
-    /*private int contadorLuz;
+    private int contadorLuz;
     private int contadorAgua;
-    private boolean amarreOcupado;
-    */
-// constructor donde inicializo los booleanos con falso hasta que lo modifiquen- debe recibir el contador de agua y luz por parametro??
-    public Amarre(int numero, boolean servicioMantenimiento /*int contadorLuz, int contadorAgua*/) {
+    private Embarcacion embarcacion;
+    private Empleado empleadoEncargado;
+    
+
+    public Amarre(int numero, boolean servicioMantenimiento,int contadorLuz, int contadorAgua,Empleado empleadoEncargado) {
         this.numero = numero;
         this.servicioMantenimiento = servicioMantenimiento;
-        this.ocupado = false; // empieza como libre para empezar
-        
-        /*this.contadorLuz = contadorLuz;
+        this.contadorLuz = contadorLuz;
         this.contadorAgua = contadorAgua;
-        this.amarreOcupado = false;*/
+        this.embarcacion = null;
+		this.empleadoEncargado = empleadoEncargado;
     }
 
+    public Amarre(int numero, boolean servicioMantenimiento,int contadorLuz, int contadorAgua) {
+        this(numero, servicioMantenimiento,contadorLuz,contadorAgua,null);
+    }
+
+    
+    public void setEmbarcacion(Embarcacion embarcacion) {
+	    this.embarcacion = embarcacion;
+    }
+    
     public int getNumero() {
         return numero;
     }
    
-    public boolean tieneServicioMantenimiento(){
-        return servicioMantenimiento;
-    }
-
     public boolean isOcupado(){
-        return ocupado;
-    }
-    
-    public void setOcupado(boolean ocupado) {
-        this.ocupado = ocupado;
+        return this.embarcacion != null;
     }
 
     @Override
     public String toString() {
-        return "Amarre #" + numero + " | Servicio mantenimiento: " + servicioMantenimiento + " | Ocupado: " + ocupado;
+        String texto = "Amarre #" + numero + " | Servicio mantenimiento: " + servicioMantenimiento + " | : "; 
+    	if (this.isOcupado()) {
+			texto += " Si";
+			texto += embarcacion;
+    	}
+		else
+			texto += " No";
+        return  texto;
     }
+
+	public boolean mismoNumero(int numero) {
+		return this.numero == numero;
+	}
+
+	public boolean mismoEncargado(Empleado empleado) {
+		return this.empleadoEncargado == empleado;
+	}
+
+	public void agregarEmpleado(Empleado empleado) {
+		this.empleadoEncargado = empleado;
+		
+	}
     
     
 }
